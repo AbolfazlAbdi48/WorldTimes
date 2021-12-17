@@ -16,7 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
         CategoryInline,
     ]
     list_filter = ('is_active', 'created', 'updated')
-    list_display = ('__str__', 'is_active', 'created', 'updated')
+    list_display = ('__str__', 'is_active', 'slug', 'created', 'updated')
     list_editable = ('is_active',)
 
 
@@ -28,7 +28,7 @@ class TagAdmin(admin.ModelAdmin):
         TagInline,
     ]
     list_filter = ('is_active', 'created', 'updated')
-    list_display = ('__str__', 'is_active', 'created', 'updated')
+    list_display = ('__str__', 'is_active', 'slug', 'created', 'updated')
     list_editable = ('is_active',)
 
 

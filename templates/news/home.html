@@ -1,0 +1,323 @@
+{% extends 'news/base/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}World Times | Home{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row" data-aos="fade-up">
+            <div class="col-xl-8 stretch-card grid-margin">
+                <div class="position-relative">
+                    <img
+                            src="{{ last_news.image.url }}"
+                            alt="banner"
+                            class="img-fluid"
+                    />
+                    <div class="banner-content">
+                        <div class="badge badge-danger fs-12 font-weight-bold mb-3">
+                            {{ last_news.categories.first }}
+                        </div>
+                        <h1 class="mb-2">
+                            {{ last_news.title|truncatewords:6 }}
+                        </h1>
+                        <div class="fs-12">
+                            {{ last_news.created|naturaltime }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 stretch-card grid-margin">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h2>Latest news</h2>
+
+                        {% for latest_new in latest_news %}
+                            <div
+                                    class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between"
+                            >
+                                <div class="pr-3">
+                                    <h5>
+                                        <a href="">{{ latest_new.title|truncatewords:5 }}</a>
+                                    </h5>
+                                    <div class="fs-12">
+                                        {{ latest_new.created|naturaltime }}
+                                    </div>
+                                </div>
+                                <div class="rotate-img">
+                                    <img
+                                            src="{{ latest_new.image.url }}"
+                                            alt="thumb"
+                                            width="190px"
+                                            height="144px"
+                                            class="img-fluid img-lg"
+                                    />
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-aos="fade-up">
+            <div class="col-lg-3 stretch-card grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Category</h2>
+                        <ul class="vertical-menu">
+                            {% for category in categories %}
+
+                                <li><a href="{% url 'news:news-by-category' category.slug %}">{{ category.name }}</a></li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 stretch-card grid-margin">
+                <div class="card">
+                    <div class="card-body">
+
+                        {% for latest_new in latest_news %}
+                            <div class="row">
+                                <div class="col-sm-4 grid-margin">
+                                    <div class="position-relative">
+                                        <div class="rotate-img">
+                                            <img
+                                                    src="{{ latest_new.image.url }}"
+                                                    alt="thumb"
+                                                    class="img-fluid"
+                                            />
+                                        </div>
+                                        <div class="badge-positioned">
+                                            <a href=""
+                                               class="badge badge-danger font-weight-bold">{{ latest_new.categories.first }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8  grid-margin">
+                                    <h2 class="mb-2 font-weight-600">
+                                        {{ latest_new.title|truncatewords:9 }}
+                                    </h2>
+                                    <div class="fs-13 mb-2">
+                                        {{ latest_new.created|naturaltime }}
+                                    </div>
+                                    <p class="mb-0">
+                                        {{ latest_new.description|truncatewords:8 }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-aos="fade-up">
+            <div class="col-sm-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card-title">
+                                    Trends
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 grid-margin">
+                                        <div class="position-relative">
+                                            <div class="rotate-img">
+                                                <img
+                                                        src="{% static 'images/dashboard/home_7.jpg' %}"
+                                                        alt="thumb"
+                                                        class="img-fluid"
+                                                />
+                                            </div>
+                                            <div class="badge-positioned w-90">
+                                                <div
+                                                        class="d-flex justify-content-between align-items-center"
+                                                >
+                                  <span
+                                          class="badge badge-danger font-weight-bold"
+                                  >Lifestyle</span
+                                  >
+                                                    <div class="video-icon">
+                                                        <i class="mdi mdi-play"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 grid-margin">
+                                        <div class="position-relative">
+                                            <div class="rotate-img">
+                                                <img
+                                                        src="{% static 'images/dashboard/home_8.jpg' %}"
+                                                        alt="thumb"
+                                                        class="img-fluid"
+                                                />
+                                            </div>
+                                            <div class="badge-positioned w-90">
+                                                <div
+                                                        class="d-flex justify-content-between align-items-center"
+                                                >
+                                                    <span class="badge badge-danger font-weight-bold">National News</span>
+                                                    <div class="video-icon">
+                                                        <i class="mdi mdi-play"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 grid-margin">
+                                        <div class="position-relative">
+                                            <div class="rotate-img">
+                                                <img
+                                                        src="{% static 'images/dashboard/home_9.jpg' %}"
+                                                        alt="thumb"
+                                                        class="img-fluid"
+                                                />
+                                            </div>
+                                            <div class="badge-positioned w-90">
+                                                <div
+                                                        class="d-flex justify-content-between align-items-center"
+                                                >
+                                  <span
+                                          class="badge badge-danger font-weight-bold"
+                                  >Lifestyle</span
+                                  >
+                                                    <div class="video-icon">
+                                                        <i class="mdi mdi-play"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 grid-margin">
+                                        <div class="position-relative">
+                                            <div class="rotate-img">
+                                                <img
+                                                        src="{% static 'images/dashboard/home_10.jpg' %}"
+                                                        alt="thumb"
+                                                        class="img-fluid"
+                                                />
+                                            </div>
+                                            <div class="badge-positioned w-90">
+                                                <div
+                                                        class="d-flex justify-content-between align-items-center"
+                                                >
+                                  <span
+                                          class="badge badge-danger font-weight-bold"
+                                  >National News</span
+                                  >
+                                                    <div class="video-icon">
+                                                        <i class="mdi mdi-play"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div
+                                        class="d-flex justify-content-between align-items-center"
+                                >
+                                    <div class="card-title">
+                                        Latest Video
+                                    </div>
+                                    <p class="mb-3">See all</p>
+                                </div>
+                                <div
+                                        class="d-flex justify-content-between align-items-center border-bottom pb-2"
+                                >
+                                    <div class="div-w-80 mr-3">
+                                        <div class="rotate-img">
+                                            <img
+                                                    src="{% static 'images/dashboard/home_11.jpg' %}"
+                                                    alt="thumb"
+                                                    class="img-fluid"
+                                            />
+                                        </div>
+                                    </div>
+                                    <h3 class="font-weight-600 mb-0">
+                                        Apple Introduces Apple Watch
+                                    </h3>
+                                </div>
+                                <div
+                                        class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-2"
+                                >
+                                    <div class="div-w-80 mr-3">
+                                        <div class="rotate-img">
+                                            <img
+                                                    src="{% static 'images/dashboard/home_12.jpg' %}"
+                                                    alt="thumb"
+                                                    class="img-fluid"
+                                            />
+                                        </div>
+                                    </div>
+                                    <h3 class="font-weight-600 mb-0">
+                                        SEO Strategy & Google Search
+                                    </h3>
+                                </div>
+                                <div
+                                        class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-2"
+                                >
+                                    <div class="div-w-80 mr-3">
+                                        <div class="rotate-img">
+                                            <img
+                                                    src="{% static 'images/dashboard/home_13.jpg' %}"
+                                                    alt="thumb"
+                                                    class="img-fluid"
+                                            />
+                                        </div>
+                                    </div>
+                                    <h3 class="font-weight-600 mb-0">
+                                        Cycling benefit & disadvantag
+                                    </h3>
+                                </div>
+                                <div
+                                        class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-2"
+                                >
+                                    <div class="div-w-80 mr-3">
+                                        <div class="rotate-img">
+                                            <img
+                                                    src="{% static 'images/dashboard/home_14.jpg' %}"
+                                                    alt="thumb"
+                                                    class="img-fluid"
+                                            />
+                                        </div>
+                                    </div>
+                                    <h3 class="font-weight-600">
+                                        The Major Health Benefits of
+                                    </h3>
+                                </div>
+                                <div
+                                        class="d-flex justify-content-between align-items-center pt-3"
+                                >
+                                    <div class="div-w-80 mr-3">
+                                        <div class="rotate-img">
+                                            <img
+                                                    src="{% static 'images/dashboard/home_15.jpg' %}"
+                                                    alt="thumb"
+                                                    class="img-fluid"
+                                            />
+                                        </div>
+                                    </div>
+                                    <h3 class="font-weight-600 mb-0">
+                                        Powerful Moments of Peace
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,5 +1,6 @@
 import os
 from random import randint
+from django.db.models import Q
 from django.utils import timezone
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -60,6 +61,20 @@ class Tag(models.Model):
         return f'{self.name}'
 
 
+class NewsManger(models.Manager):
+    def related_news(self, query):
+        return self.filter(categories__name__icontains=query, is_active=True)[:2]
+
+    def search(self, query):
+        lookup = (
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(tags__name__icontains=query) |
+                Q(categories__name__icontains=query)
+        )
+        return self.filter(lookup, is_active=True).distinct()
+
+
 class News(models.Model):
     title = models.CharField(max_length=120, verbose_name='Title')
     slug = models.SlugField(blank=True, verbose_name='News Slug')
@@ -93,3 +108,5 @@ class News(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
+    objects = NewsManger()

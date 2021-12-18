@@ -1,4 +1,5 @@
 import requests
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from news.models import News, Category, Tag
@@ -17,6 +18,14 @@ def header_component(request):
         'live_temp': live_temp.json()['result']
     }
     return render(request, 'news/base/header_component.html', context)
+
+
+def aside_component(request):
+    latest_news = News.objects.filter(is_active=True).order_by('-id')[:7]
+    context = {
+        'latest_news': latest_news
+    }
+    return render(request, 'news/base/aside_component.html', context)
 
 
 def home(request):
@@ -64,6 +73,17 @@ class NewsByTagListView(ListView):
     template_name = 'news/news_list.html'
 
 
+class SearchListView(ListView):
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+            return News.objects.search(query)
+        else:
+            raise Http404
+
+    template_name = 'news/news_list.html'
+
+
 class NewsDetailView(DetailView):
     def get_object(self, queryset=None):
         news_pk = self.kwargs.get('pk')
@@ -71,5 +91,12 @@ class NewsDetailView(DetailView):
         news = get_object_or_404(News, pk=news_pk, slug=news_slug)
 
         return news
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsDetailView, self).get_context_data(**kwargs)
+        # related news
+        first_categories = self.object.categories.first()
+        context['related_news'] = News.objects.related_news(first_categories.name)
+        return context
 
     template_name = 'news/news_detail.html'

@@ -17,7 +17,7 @@
                                 <a href="{% url 'logout' %}" class="nav-link"> / Logout</a>
                             {% else %}
                                 <a href="{% url 'login' %}" class="nav-link">Login </a>
-                                <a href="#" class="nav-link"> / Signup</a>
+                                <a href="{% url 'account:register' %}" class="nav-link"> / Signup</a>
                             {% endif %}
                         </li>
                     </ul>

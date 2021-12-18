@@ -1,7 +1,7 @@
 {% extends 'news/base/base.html' %}
 {% load widget_tweaks %}
 
-{% block title %}World Time | Login{% endblock %}
+{% block title %}World Time | SignUp{% endblock %}
 
 {% block main %}
     <div class="container">
@@ -12,10 +12,11 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-12">
-                            <h1>Login</h1>
+                            <h1>SignUp</h1>
                         </div>
                         <div class="col-md-12 mb-2">
                             {{ form.username|add_class:"form-control"|attr:"placeholder:Username" }}
+                            <div>{{ form.username.help_text }}</div>
                             {% if form.username.errors %}
                                 {% for error in form.username.errors %}
                                     <ul>
@@ -25,9 +26,21 @@
                             {% endif %}
                         </div>
                         <div class="col-md-12 mb-2">
-                            {{ form.password|add_class:"form-control"|attr:"placeholder:Password" }}
-                            {% if form.password.errors %}
-                                {% for error in form.password.errors %}
+                            {{ form.password1|add_class:"form-control"|attr:"placeholder:Password" }}
+                            <div>{{ form.password1.help_text }}</div>
+                            {% if form.password1.errors %}
+                                {% for error in form.password1.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            {{ form.password2|add_class:"form-control"|attr:"placeholder:Password" }}
+                            <div>{{ form.password2.help_text }}</div>
+                            {% if form.password2.errors %}
+                                {% for error in form.password2.errors %}
                                     <ul>
                                         <li class="text-danger">{{ error }}</li>
                                     </ul>
@@ -40,12 +53,10 @@
                             </div>
                         {% endif %}
                         <div class="col-md-12 mb-3">
-                            <a href="{% url 'password_reset' %}">Forget Password?!</a>
-                            <br>
-                            <a href="{% url 'account:register' %}">Create Account</a>
+                            <a href="{% url 'account:register' %}">Login</a>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-success">Login</button>
+                            <button class="btn btn-success">SignUp</button>
                         </div>
                     </div>
                 </form>

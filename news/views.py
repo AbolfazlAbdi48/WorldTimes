@@ -1,9 +1,22 @@
+import requests
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from news.models import News, Category, Tag
 
 
 # Create your views here.
+
+def header_component(request):
+    latest_categories = Category.objects.filter(is_active=True).order_by('-id')[:7]
+    live_date = requests.get('http://api.codebazan.ir/time-date/?td=dateen')
+    live_temp = requests.get('https://api.codebazan.ir/weather/?city=tehran')
+
+    context = {
+        'latest_categories': latest_categories,
+        'live_date': live_date.text,
+        'live_temp': live_temp.json()['result']
+    }
+    return render(request, 'news/base/header_component.html', context)
 
 
 def home(request):

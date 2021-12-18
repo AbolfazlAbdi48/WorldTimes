@@ -1,0 +1,110 @@
+{% load static %}
+
+<header id="header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="navbar-top">
+                <div class="d-flex justify-content-between align-items-center">
+                    <ul class="navbar-top-left-menu">
+                        <li class="nav-item">
+                            <form>
+                                <input type="search" class="form-control form-control-sm" placeholder="Search">
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-top-right-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Sign in</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-bottom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <a class="navbar-brand" href="{% url 'news:home' %}"
+                        ><img src="{% static 'images/logo.svg' %}" alt=""
+                        /></a>
+                    </div>
+                    <div>
+                        <button
+                                class="navbar-toggler"
+                                type="button"
+                                data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div
+                                class="navbar-collapse justify-content-center collapse"
+                                id="navbarSupportedContent"
+                        >
+                            <ul
+                                    class="navbar-nav d-lg-flex justify-content-between align-items-center"
+                            >
+                                <li>
+                                    <button class="navbar-close">
+                                        <i class="mdi mdi-close"></i>
+                                    </button>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'news:home' %}">Home</a>
+                                </li>
+                                {% for latest_category in latest_categories %}
+
+                                    <li class="nav-item active">
+                                        <a class="nav-link"
+                                           href="{% url 'news:news-by-category' latest_category.slug %}">{{ latest_category.name }}</a>
+                                    </li>
+
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="social-media">
+                        <li>
+                            <a href="#">
+                                <i class="mdi mdi-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi mdi-youtube"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi mdi-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- partial -->
+<div class="flash-news-banner">
+    <div class="container">
+        <div class="d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <span class="badge badge-dark mr-3">Flash news</span>
+                <p class="mb-0">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s.
+                </p>
+            </div>
+            <div class="d-flex">
+                <span class="mr-3 text-danger">{{ live_date }}</span>
+                <span class="text-danger">{{ live_temp.دما }} , {{ live_temp.استان }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import requests
+from django.utils import timezone
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
@@ -9,13 +10,11 @@ from news.models import News, Category, Tag
 
 def header_component(request):
     latest_categories = Category.objects.filter(is_active=True).order_by('-id')[:7]
-    live_date = requests.get('http://api.codebazan.ir/time-date/?td=dateen')
-    live_temp = requests.get('https://api.codebazan.ir/weather/?city=tehran')
+    live_date = timezone.now()
 
     context = {
         'latest_categories': latest_categories,
-        'live_date': live_date.text,
-        'live_temp': live_temp.json()['result']
+        'live_date': live_date,
     }
     return render(request, 'news/base/header_component.html', context)
 
@@ -89,6 +88,10 @@ class NewsDetailView(DetailView):
         news_pk = self.kwargs.get('pk')
         news_slug = self.kwargs.get('slug')
         news = get_object_or_404(News, pk=news_pk, slug=news_slug)
+
+        ip_address = self.request.user.ip_address
+        if ip_address not in news.hits.all():
+            news.hits.add(ip_address)
 
         return news
 

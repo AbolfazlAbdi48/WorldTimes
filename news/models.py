@@ -23,6 +23,21 @@ def upload_image_path(instance, filename):
     return f"articles/{final_name}"
 
 
+class IPAddress(models.Model):
+    """
+    The IP address save model,
+    Many-to-many realationship with article.
+    """
+    ip_address = models.GenericIPAddressField(verbose_name='IP Address')
+
+    class Meta:
+        verbose_name = 'IPAddress'
+        verbose_name_plural = 'IPAddresses'
+
+    def __str__(self):
+        return f'{self.ip_address}'
+
+
 class Category(models.Model):
     name = models.CharField(max_length=120, verbose_name='Category Name')
     slug = models.SlugField(blank=True, verbose_name='Category Slug')
@@ -90,6 +105,7 @@ class News(models.Model):
     )
     categories = models.ManyToManyField(Category, verbose_name='Categories')
     tags = models.ManyToManyField(Tag, verbose_name='Tags')
+    hits = models.ManyToManyField(IPAddress, verbose_name='IP Addresses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

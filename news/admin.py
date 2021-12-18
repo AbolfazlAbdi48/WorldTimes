@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Tag, News
+from .models import Category, Tag, News, IPAddress
 
 
 # Register your models here.
@@ -48,3 +48,4 @@ class NewsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(News, NewsAdmin)
+admin.site.register(IPAddress)

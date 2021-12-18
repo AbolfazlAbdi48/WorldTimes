@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-sm-8 grid-margin">
                           <h2 class="font-weight-600 mb-2">
-                            {{ object.title }}
+                              <a href="{% url 'news:news-detail' object.pk object.slug %}">{{ object.title }}</a>
                           </h2>
                           <p class="fs-13 text-muted mb-0">
                             {{ object.created|naturaltime }}

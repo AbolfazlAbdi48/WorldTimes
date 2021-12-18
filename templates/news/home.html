@@ -12,6 +12,8 @@
                     <img
                             src="{{ last_news.image.url }}"
                             alt="banner"
+                            width="1450"
+                            height="820"
                             class="img-fluid"
                     />
                     <div class="banner-content">
@@ -19,7 +21,7 @@
                             {{ last_news.categories.first }}
                         </div>
                         <h1 class="mb-2">
-                            {{ last_news.title|truncatewords:6 }}
+                            <a href="{% url 'news:news-detail' last_news.pk last_news.slug %}">{{ last_news.title|truncatewords:6 }}</a>
                         </h1>
                         <div class="fs-12">
                             {{ last_news.created|naturaltime }}
@@ -38,7 +40,7 @@
                             >
                                 <div class="pr-3">
                                     <h5>
-                                        <a href="">{{ latest_new.title|truncatewords:5 }}</a>
+                                        <a href="{% url 'news:news-detail' latest_new.pk latest_new.slug %}">{{ latest_new.title|truncatewords:5 }}</a>
                                     </h5>
                                     <div class="fs-12">
                                         {{ latest_new.created|naturaltime }}
@@ -69,7 +71,8 @@
                         <ul class="vertical-menu">
                             {% for category in categories %}
 
-                                <li><a href="{% url 'news:news-by-category' category.slug %}">{{ category.name }}</a></li>
+                                <li><a href="{% url 'news:news-by-category' category.slug %}">{{ category.name }}</a>
+                                </li>
 
                             {% endfor %}
                         </ul>
@@ -92,14 +95,13 @@
                                             />
                                         </div>
                                         <div class="badge-positioned">
-                                            <a href=""
-                                               class="badge badge-danger font-weight-bold">{{ latest_new.categories.first }}</a>
+                                            <a href="{% url 'news:news-by-category' latest_new.categories.first.slug %}" class="badge badge-danger font-weight-bold">{{ latest_new.categories.first }}</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-8  grid-margin">
                                     <h2 class="mb-2 font-weight-600">
-                                        {{ latest_new.title|truncatewords:9 }}
+                                        <a href="{% url 'news:news-detail' latest_new.pk latest_new.slug %}">{{ latest_new.title|truncatewords:9 }}</a>
                                     </h2>
                                     <div class="fs-13 mb-2">
                                         {{ latest_new.created|naturaltime }}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from news.models import News, Category, Tag
 
 
@@ -29,7 +29,7 @@ class NewsByCategoryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsByCategoryListView, self).get_context_data(**kwargs)
-        context['category'] = category.name
+        context['title'] = category
         return context
 
     template_name = 'news/news_list.html'
@@ -49,3 +49,14 @@ class NewsByTagListView(ListView):
         return context
 
     template_name = 'news/news_list.html'
+
+
+class NewsDetailView(DetailView):
+    def get_object(self, queryset=None):
+        news_pk = self.kwargs.get('pk')
+        news_slug = self.kwargs.get('slug')
+        news = get_object_or_404(News, pk=news_pk, slug=news_slug)
+
+        return news
+
+    template_name = 'news/news_detail.html'

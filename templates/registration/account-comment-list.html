@@ -1,0 +1,34 @@
+{% extends 'news/base/base.html' %}
+{% load widget_tweaks %}
+{% load humanize %}
+
+{% block title %}World Time | Account{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            {% include 'registration/account_aside_component.html' %}
+            <div class="col-md-8 bg-white py-4 px-5 rounded">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h3>My Comments:</h3>
+                    </div>
+
+                    {% for comment in object_list %}
+                        <div class="col-md-12 border p-4 mb-3">
+                            <h4>News: <a
+                                    href="{% url 'news:news-detail' comment.news.id comment.news.slug %}">{{ comment.news.title }}</a>
+                            </h4>
+                            <h5>
+                                Comment Message: <a href="{% url 'account:comment-update' comment.pk %}">{{ comment.text }}</a>
+                            </h5>
+                            <p>Created at: {{ comment.created|naturaltime }}</p>
+                            <a href="{% url 'account:comment-delete' comment.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

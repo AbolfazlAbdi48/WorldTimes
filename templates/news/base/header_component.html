@@ -13,7 +13,7 @@
                     <ul class="navbar-top-right-menu">
                         <li class="nav-item">
                             {% if request.user.is_authenticated %}
-                                <a href="#" class="nav-link mr-1">Welcome {{ request.user }}!! </a>
+                                <a href="{% url 'account:home' %}" class="nav-link mr-1">Welcome {{ request.user }}!! </a>
                                 <a href="{% url 'logout' %}" class="nav-link"> / Logout</a>
                             {% else %}
                                 <a href="{% url 'login' %}" class="nav-link">Login </a>

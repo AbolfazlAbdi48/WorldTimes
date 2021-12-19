@@ -1,0 +1,37 @@
+{% extends 'news/base/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}World Time | Account{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            {% include 'registration/account_aside_component.html' %}
+            <div class="col-md-8 bg-white p-4 rounded">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <h3>Update Comment: {{ object }}</h3>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.text.id_for_label }}">{{ form.text.label }}:</label>
+                            {{ form.text|add_class:"form-control"|attr:"placeholder:Text" }}
+                            {% if form.text.errors %}
+                                {% for error in form.text.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-warning">Update</button>
+                            <a href="{% url 'account:comment-delete' object.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

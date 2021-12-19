@@ -1,0 +1,69 @@
+{% extends 'news/base/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}World Time | Account{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            {% include 'registration/account_aside_component.html' %}
+            <div class="col-md-8 bg-white p-4 rounded">
+                <form method="post">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <h3>Update Account</h3>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.username.id_for_label }}">{{ form.username.label }}:</label>
+                            {{ form.username|add_class:"form-control"|attr:"placeholder:Username" }}
+                            {% if form.username.errors %}
+                                {% for error in form.username.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+                            {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
+                            {% if form.email.errors %}
+                                {% for error in form.email.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}:</label>
+                            {{ form.first_name|add_class:"form-control"|attr:"placeholder:FirstName" }}
+                            {% if form.first_name.errors %}
+                                {% for error in form.first_name.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}:</label>
+                            {{ form.last_name|add_class:"form-control"|attr:"placeholder:LastName" }}
+                            {% if form.last_name.errors %}
+                                {% for error in form.last_name.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    <div class="col-md-12">
+                        <button class="btn btn-warning">Update</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

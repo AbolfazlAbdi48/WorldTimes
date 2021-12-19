@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'news:home'
+LOGIN_REDIRECT_URL = 'account:home'
 LOGOUT_REDIRECT_URL = 'news:home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

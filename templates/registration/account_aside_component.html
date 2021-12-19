@@ -1,0 +1,13 @@
+<div class="col-md-4">
+    <div class="list-group">
+        {% with request.resolver_match.url_name as url_name %}
+            <a href="{% url 'account:home' %}"
+               class="list-group-item list-group-item-action {% if url_name == 'home' %}active{% endif %}"> Account</a>
+            <a href="{% url 'account:update' %}"
+               class="list-group-item list-group-item-action {% if url_name == 'update' %}active{% endif %}">Update
+                Account</a>
+            <a href="{% url 'account:comments' %}"
+               class="list-group-item list-group-item-action {% if url_name == 'comments' %}active{% endif %}">My Comments</a>
+        {% endwith %}
+    </div>
+</div>

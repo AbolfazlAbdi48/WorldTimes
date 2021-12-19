@@ -1,0 +1,17 @@
+{% extends 'news/base/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}World Time | Account{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            {% include 'registration/account_aside_component.html' %}
+            <div class="col-md-8 bg-white p-4 rounded">
+                <h3>UserName: {{ object.username }}</h3>
+                <p>Email: {{ object.email }}</p>
+                <p>Name: {{ object.get_full_name }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

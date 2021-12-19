@@ -126,3 +126,18 @@ class News(models.Model):
         return f'{self.title}'
 
     objects = NewsManger()
+
+
+class Comment(models.Model):
+    text = models.TextField(verbose_name='Text')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='User')
+    news = models.ForeignKey(News, on_delete=models.CASCADE, blank=True, null=True, verbose_name='News')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+    def __str__(self):
+        return f'{self.text}'

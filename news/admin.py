@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Tag, News, IPAddress
+from .models import Category, Tag, News, IPAddress, Comment
 
 
 # Register your models here.
@@ -49,3 +49,11 @@ class NewsAdmin(admin.ModelAdmin):
 
 admin.site.register(News, NewsAdmin)
 admin.site.register(IPAddress)
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'owner', 'news')
+    list_filter = ('created',)
+
+
+admin.site.register(Comment, CommentAdmin)

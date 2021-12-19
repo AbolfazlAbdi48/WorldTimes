@@ -26,6 +26,17 @@
                             {% endif %}
                         </div>
                         <div class="col-md-12 mb-2">
+                            {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
+                            <div>{{ form.email.help_text }}</div>
+                            {% if form.username.errors %}
+                                {% for error in form.email.errors %}
+                                    <ul>
+                                        <li class="text-danger">{{ error }}</li>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12 mb-2">
                             {{ form.password1|add_class:"form-control"|attr:"placeholder:Password" }}
                             <div>{{ form.password1.help_text }}</div>
                             {% if form.password1.errors %}

@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('', include('news.urls')),
     path('account/', include('account.urls')),
+    path('api/', include('api.urls')),
     path('account/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]

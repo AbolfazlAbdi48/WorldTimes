@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     'rest_framework',
+    'drf_yasg',
 
     'account',
     'news',

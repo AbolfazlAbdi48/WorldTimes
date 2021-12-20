@@ -1,12 +1,39 @@
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import CommentSerializer, CommentHyperlinkedSerializer
-from news.models import Comment
+from .serializers import (
+    CommentSerializer,
+    CommentHyperlinkedSerializer,
+    NewsSerializer,
+    CategorySerializer,
+    TagSerializer
+)
+from news.models import Comment, Tag, Category, News
 
 
 # Create your views here.
+class NewsListView(ListAPIView):
+    queryset = News.objects.filter(is_active=True)
+    serializer_class = NewsSerializer
+
+
+class NewsDetailView(RetrieveAPIView):
+    queryset = News.objects.filter(is_active=True)
+    serializer_class = NewsSerializer
+
+
+class CategoryListView(ListAPIView):
+    queryset = Category.objects.filter(is_active=True)
+    serializer_class = CategorySerializer
+
+
+class TagListView(ListAPIView):
+    queryset = Tag.objects.filter(is_active=True)
+    serializer_class = TagSerializer
+
+
 class CommentAPIView(APIView):
     """
     Api Endpoint to list comments,

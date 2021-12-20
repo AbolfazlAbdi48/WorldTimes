@@ -3,73 +3,35 @@
 
 <!DOCTYPE html>
 <html lang="zxx">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    {#  include header refrences  #}
+    {% include 'news/base/header_refrences.html' %}
     <title>{% block title %}{% endblock %}</title>
-    <!-- plugin css for this page -->
-    <link
-      rel="stylesheet"
-      href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}"
-    />
-    <link rel="stylesheet" href="{% static 'vendors/aos/dist/aos.css/aos.css' %}" />
+</head>
 
-    <!-- End plugin css for this page -->
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+<body>
+<div class="container-scroller">
+    <div class="main-panel">
 
-    <!-- inject:css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- endinject -->
-  </head>
-
-  <body>
-    <div class="container-scroller">
-      <div class="main-panel">
         {% render_partial 'news.views.header_component' %}
 
         <div class="content-wrapper">
-          {% block main %}
-          
-          {% endblock %}
+            {% block main %}
+
+            {% endblock %}
         </div>
         <!-- main-panel ends -->
         <!-- container-scroller ends -->
 
-        <!-- partial:partials/_footer.html -->
-        <footer>
-          <div class="footer-bottom">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="d-sm-flex justify-content-between align-items-center">
-                    <div class="fs-14 font-weight-600">
-                      © 2020 @ <a href="https://www.bootstrapdash.com/" target="_blank" class="text-white"> BootstrapDash</a>. All rights reserved.
-                    </div>
-                    <div class="fs-14 font-weight-600">
-                      Handcrafted by <a href="https://www.bootstrapdash.com/" target="_blank" class="text-white">BootstrapDash</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+        {% render_partial 'news.views.footer_component' %}
 
         <!-- partial -->
-      </div>
     </div>
-    <!-- inject:js -->
-    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
-    <!-- endinject -->
-    <!-- plugin js for this page -->
-    <script src="{% static 'vendors/aos/dist/aos.js/aos.js' %}"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
-    <script src="{% static 'js/demo.js' %}"></script>
-    <script src="{% static 'js/jquery.easeScroll.js' %}"></script>
-    {% block new_js_code %}{% endblock %}
-    <!-- End custom js for this page-->
-  </body>
+</div>
+
+{# include footer refrences #}
+{% include 'news/base/footer_refrences.html' %}
+{% block new_js_code %}{% endblock %}
+
+</body>
 </html>

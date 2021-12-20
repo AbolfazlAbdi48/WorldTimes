@@ -26,7 +26,7 @@ def upload_image_path(instance, filename):
 class IPAddress(models.Model):
     """
     The IP address save model,
-    Many-to-many realationship with article.
+    Many-to-many relationship with news.
     """
     ip_address = models.GenericIPAddressField(verbose_name='IP Address')
 
@@ -39,6 +39,10 @@ class IPAddress(models.Model):
 
 
 class Category(models.Model):
+    """
+    The main category model,
+    Many-to-many relationship with news.
+    """
     name = models.CharField(max_length=120, verbose_name='Category Name')
     slug = models.SlugField(blank=True, verbose_name='Category Slug')
     is_active = models.BooleanField(default=True, verbose_name='Active/DeActive')
@@ -58,6 +62,10 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
+    """
+    The main tag model,
+    Many-to-many relationship with news.
+    """
     name = models.CharField(max_length=120, verbose_name='Tag Name')
     slug = models.SlugField(blank=True, verbose_name='Tag Slug')
     is_active = models.BooleanField(default=True, verbose_name='Active/DeActive')
@@ -77,6 +85,9 @@ class Tag(models.Model):
 
 
 class NewsManger(models.Manager):
+    """
+    The news model manager.
+    """
     def related_news(self, query):
         return self.filter(categories__name__icontains=query, is_active=True)[:2]
 
@@ -91,6 +102,10 @@ class NewsManger(models.Manager):
 
 
 class News(models.Model):
+    """
+    The main news model,
+    One-to-many relationship with comment.
+    """
     title = models.CharField(max_length=120, verbose_name='Title')
     slug = models.SlugField(blank=True, verbose_name='News Slug')
     description = models.TextField(verbose_name='Description')
@@ -129,6 +144,9 @@ class News(models.Model):
 
 
 class Comment(models.Model):
+    """
+    The comment model.
+    """
     text = models.TextField(verbose_name='Text')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='User')
     news = models.ForeignKey(News, on_delete=models.CASCADE, blank=True, null=True, verbose_name='News')

@@ -11,12 +11,19 @@ from .models import User
 
 
 class RegisterView(CreateView):
+    """
+    The view for register user.
+    """
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
     form_class = RegisterForm
 
 
 class AccountDetailView(LoginRequiredMixin, DetailView):
+    """
+    The view return registered user details.
+    """
+
     def get_object(self, queryset=None):
         return User.objects.filter(id=self.request.user.id).first()
 
@@ -33,6 +40,10 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class CommentListView(LoginRequiredMixin, ListView):
+    """
+    The view return authenticated user comments.
+    """
+
     def get_queryset(self):
         return Comment.objects.filter(owner=self.request.user).order_by('-id')
 

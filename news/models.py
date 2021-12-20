@@ -88,6 +88,7 @@ class NewsManger(models.Manager):
     """
     The news model manager.
     """
+
     def related_news(self, query):
         return self.filter(categories__name__icontains=query, is_active=True)[:2]
 
@@ -159,3 +160,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.text}'
+
+    def get_created_time(self):
+        return f'{self.created.hour}:{self.created.minute}:{self.created.second}'
+
+    def get_created_date(self):
+        return f'{self.created.year}/{self.created.day}/{self.created.month}'

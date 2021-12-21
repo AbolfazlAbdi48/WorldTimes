@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@pt3bg*18$87j4boyaym50tzq)y^v$5u#)h7g-m^g!252pquah'
+SECRET_KEY = config('secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,11 +85,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'worldtimesDB',
-        'USER': 'postgres',
-        'PASSWORD': 'MRabolfazl84',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': config('database_name'),
+        'USER': config('database_username'),
+        'PASSWORD': config('database_password'),
+        'HOST': config('database_host'),
+        'PORT': config('database_port'),
     }
 }
 

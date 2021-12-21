@@ -121,7 +121,7 @@ class News(models.Model):
     )
     categories = models.ManyToManyField(Category, verbose_name='Categories')
     tags = models.ManyToManyField(Tag, verbose_name='Tags')
-    hits = models.ManyToManyField(IPAddress, verbose_name='IP Addresses')
+    hits = models.ManyToManyField(IPAddress, blank=True, verbose_name='IP Addresses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
